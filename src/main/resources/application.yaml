@@ -1,0 +1,107 @@
+
+grpc:
+  port: 6565
+
+server:
+  port: 8090
+  servlet:
+    context-path: /api
+
+management:
+  server:
+    port: 8091
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus, auditevents
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+
+keystore:
+  name: example.jks
+  password: foobar
+  alias: example
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  security:
+    saml2:
+      enabled: "false"
+      network:
+        read-timeout: 10000
+        connect-timeout: 5000
+      service-provider:
+        entity-id: "spring.security.saml.sp.id"
+        basePath: "http://localhost:8090/api"
+        sign-metadata: true
+        sign-requests: true
+        want-assertions-signed: true
+        single-logout-enabled: true
+        name-ids:
+          - urn:oasis:names:tc:SAML:2.0:nameid-format:persistent
+          - urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress
+          - urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified
+        keys:
+          active:
+            name: sp-signing-key-1
+            passphrase: storepassword
+            private-key: |
+              -----BEGIN RSA PRIVATE KEY-----
+              MIIEowIBAAKCAQEAqhjj+bce2yXmtDy6mhm46b4LfurJ9c4u4UAUPv6jhM/fUQkK
+              TTaAJDPR6FjmgIOvj8sXMVk6MJLUkZZOwB6Ha7a8mlDNgY3iZDnoasPzdR7DA0UF
+              sIvsTWOeUjNzcJVc5FHys/5Lj5+i8MInlRaejYD1+Gb0DCnvg69gxpzXX/10LAnu
+              ioFnZCmZz/vCAKcgey2rOIU0rgrrdESyIwmWxN/N0TTgvrcQQRyru1fPr2yw060B
+              znxUmHZat2U+mnOflPgv1+lfueDqpum4ZGtBykjTSD3+R5Pkt75e8rDPEgJnZ9Xk
+              pfxqreDSJIATike3ksj0MlcTYtXlk/9mbC9XOQIDAQABAoIBAG+qh3+YSBl2eE46
+              0AX6fPp2WPWpDYzhHsWhW6k/Yfn+vYxlcu3dqaIaouL1+dzElqy/lyo+eYUJ36L0
+              Gh7l6+E6xfZItaEnlEhX+8ybd2icGUo8NdABC9CCZZ1xSYfPhnwdkEe52cEf+8gy
+              remiP9SFpPS+IdkabrL0n4PD02Cf4WISAUo7nC6RQ4g+z5HgeP8crvucrD2ATz4P
+              1GavOGqiFouSCcW9U/7thVb1QjkgdLZIOiffLUxOTZS+fD/qtcFtfq6RaXyzJNYX
+              75mm44jrdf8GZzJJrKbNiLajNaju1u9IEBkkAQy3PipFECXypbQoS2AAvxrJGZne
+              bckIYkECgYEA1euGcDToFevB+E8lv0vsO0oQFgWtOT1ZjCzz2gsLwhAMN42CHQuh
+              oRwoJbsvFvfoAXnLH0zwju79y55WYhgTGOxKkGeZtn0Sg7PStclLGi+WgWfjDuA6
+              S+2qGif4jh+v7GZo7bHiDwTET+0XU6kKocYVBuAZUwuMqJFogGbT6qMCgYEAy46P
+              R1RhNKiXshtuYjCvBoPoeJakVerbwbpTfsE9ht38nMCNmoaU8qQ7bI4LDxNHGgiA
+              lcWn035GbG0M2y+awZzCL5lXzPMjsdGxZSGbvpjMaWycNQpU8C6+NVgetrw4ZU9/
+              cAtO2WtGhgP7A5k/rnbXiR5g+0xJ+U2oFaxOUHMCgYAokdNcQlxlk+GkgvYosnBp
+              yiEE3Cy+90idUgUpLAEd28dFXdv4QDV2BY4Dod1LYNaqOPvxwri4ktClJjFBx0kP
+              5/g4LL21I0E4owjqGvPYUoAbqKUiNBo6PieNcFkuMwo9LirmMV8q8/97HP7Yie2P
+              Qq7IMAX9fuo9Kd6Ew3ubOwKBgQCzv9+mDU0JQxcxoCeJbZQhHLpcQio79Hi6Sd8R
+              P3MldUFs6lwg6Fb/LSeMZKI/XbabtoZVu4THrepiNKn1o8P01Ihln/N4d/w9Of58
+              X4E4fZWEQvRtogH/VkeAs5/rnanvTJQsTNAEDkbocPtn4hvp4+fQnZLmVie8jmav
+              PMirIQKBgB9bBn5GrUx/RJH2ruaTsIxFM7z2HkiF6HOdPoNjrv1nsv95XZucNaRM
+              NHQuwIkOiZv9dsO9m6EwlhpHL2Mwrs+uJ2TIz9HbikHvhMz6R0qMSGYRAkD0JYv6
+              o6xltMTxY/XDAwhH/3jBGc6uXPDa2loUHFV4yFiU19ZdtALni/Gj
+              -----END RSA PRIVATE KEY-----
+            certificate: |
+              -----BEGIN CERTIFICATE-----
+              MIIDVjCCAj4CCQDCfRzm/eyrZjANBgkqhkiG9w0BAQsFADBtMQswCQYDVQQGEwJG
+              STEQMA4GA1UECAwHVXVzaW1hYTEOMAwGA1UEBwwFRXNwb28xETAPBgNVBAoMCFNl
+              bWFudHVtMSkwJwYDVQQDDCB5b2tvZ2F3YS1wMmkubW9kZWxpbmdmYWN0b3J5LmNv
+              bTAeFw0xOTA1MTgxNTM2MzRaFw0yOTA1MTUxNTM2MzRaMG0xCzAJBgNVBAYTAkZJ
+              MRAwDgYDVQQIDAdVdXNpbWFhMQ4wDAYDVQQHDAVFc3BvbzERMA8GA1UECgwIU2Vt
+              YW50dW0xKTAnBgNVBAMMIHlva29nYXdhLXAyaS5tb2RlbGluZ2ZhY3RvcnkuY29t
+              MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqhjj+bce2yXmtDy6mhm4
+              6b4LfurJ9c4u4UAUPv6jhM/fUQkKTTaAJDPR6FjmgIOvj8sXMVk6MJLUkZZOwB6H
+              a7a8mlDNgY3iZDnoasPzdR7DA0UFsIvsTWOeUjNzcJVc5FHys/5Lj5+i8MInlRae
+              jYD1+Gb0DCnvg69gxpzXX/10LAnuioFnZCmZz/vCAKcgey2rOIU0rgrrdESyIwmW
+              xN/N0TTgvrcQQRyru1fPr2yw060BznxUmHZat2U+mnOflPgv1+lfueDqpum4ZGtB
+              ykjTSD3+R5Pkt75e8rDPEgJnZ9XkpfxqreDSJIATike3ksj0MlcTYtXlk/9mbC9X
+              OQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAeSCHubjyORlJCal/s6kXDn6lWynd+
+              sRwhJSMSUq4vZzPYXICk6Njv+RcqQx0501FOfu5gmlnPOjKp1LsZpNIZEqrqcBPG
+              onDYwD+JTFljpQSqiv1BqGuSQDuzvXrKUWdKl/k6DwPPd8TbivIDqA65Uh1+IvfR
+              D2pvFL5BpJR+0XjLMdRI1p+nSN1RJj3fobV5wiCwDibHKp0p237mc5MozSV3Ypjs
+              vlFu7tLw+iPXuOEugFphXPjgVJGadTzmWVbg6LHXA2S0IZYLNpKIgNEscPP9zgZL
+              5dr8png+cXRYHjcbEmsE0aPM8xuEO5MDayoTvckN2lEsOQo9WIaTFXh0
+              -----END CERTIFICATE-----
+        providers:
+        - alias: "samltest-saml-idp"
+          link-text: "SAMLtest (https://samltest.id/)"
+          authentication-request-binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+          metadata: "https://samltest.id/saml/idp"
